@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <title>How Multiple DKIM Selectors Work For Different Email Services
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</title>
+<!--
+DREAM PULSE
+https://templatemo.com/tm-536-dream-pulse
+-->
+
+    <link rel="stylesheet" href="css/templatemo-dream-pulse.css" />
+  </head>
+  <body>
+    <main class="container-fluid">
+      <div class="row">        
+          <nav id="tmSidebar" class="tm-bg-black-transparent tm-sidebar">
+            <button class="navbar-toggler" type="button" aria-label="Toggle navigation">
+              <i class="fas fa-bars"></i>
+            </button>
+            <div class="tm-sidebar-sticky">
+              <div class="tm-brand-box">
+                
+                    
+                  </div>
+                </div>
+              </div>
+
+              <ul id="tmMainNav" class="nav flex-column text-uppercase text-right tm-main-nav">
+                
+                
+             
+              <footer class="text-center text-white small">
+               
+              </footer>
+            </div>
+          </nav>
+          
+          <main role="main" class="ml-sm-auto col-12">
+            <div
+              class="parallax-window"
+              data-parallax="scroll"
+              data-image-src="img/dream-pulse-header.jpg">
+              <div class="tm-section-wrap">
+                <section id="intro" class="tm-section">
+                    <div class="tm-bg-white-transparent tm-intro">
+                      <h1><center>How Multiple DKIM Selectors                                                                                                                                                                                                                                                                                                                                                                                                                                       
+<br><br>Work For Different Email Services   <br><br>
+
+
+
+
+
+
+
+
+
+</center></h1>
+                      <p>Businesses often rely on different email services for marketing, transactional messages, customer support, and internal communication. Each service may need its own DomainKeys Identified Mail (DKIM) setup to authenticate outgoing email. <em>Multiple DKIM selectors make this possible: they let an organization publish and manage separate public keys for different providers under one domain.</em> Each selector identifies the <a href="https://www.techtarget.com/news/What-is-a-public-key-and-how-does-it-work/836793/">public key</a> used to verify an email’s digital signature. Understanding how selectors work can help businesses manage email authentication, protect domain reputation, and support email deliverability.</p>
+<br><h2>What Are DKIM Selectors?</h2><br>
+<p>A DKIM selector is a unique identifier in an email’s DKIM signature. It points the receiving mail server to the public key it needs to verify the signature. The <strong>sending email service</strong> signs the message with a private key, while the matching public key is published in the domain’s DNS records. The receiving server uses the selector to find that key and validate the signature.</p>
+<p>For example, a domain might use the following DKIM DNS records:</p>
+<ul>
+<li>google._domainkey.example.com</li><br>
+<li>mailchimp._domainkey.example.com</li><br>
+<li>salesforce._domainkey.example.com</li><br>
+</ul>
+<p>Each selector points to a different public key. This allows multiple email services to authenticate messages using the same organizational domain without relying on a single DKIM key.</p>
+<br><h2>Why Do Businesses Need Multiple DKIM Selectors?</h2><br>
+<p>Organizations often use multiple email providers to meet different communication needs—for example, Google Workspace for employee email, Mailchimp for <a href="https://www.activecampaign.com/glossary/marketing-campaign">marketing campaigns</a>, and Salesforce for customer notifications.</p>
+<p>Using multiple DKIM selectors provides several advantages.</p>
+<br><br><p><center><img style="displya: block; margin-left: auto;" src="dkim selector.jpg" alt=dkim selector-" /></p></center><br>
+<h3>1. Separate Authentication For Different Email Services</h3>
+<p>Each email provider can use its own DKIM selector and private key, keeping authentication <strong>settings separate and making</strong> it easier to see which service signed a message.<em> For example, Google Workspace might use the selector `google`, while a marketing platform uses `marketing`. Both can authenticate email sent from `example.com`.</em></p>
+<br><h3>2. Easier DKIM Key Rotation</h3>
+<p>Regularly updating DKIM keys helps maintain email security. Using multiple selectors can simplify rotation: administrators can publish a new selector, such as selector2, while selector1 remains in use. After updating the email service, they can verify that the new key works before retiring the old selector.</p>
+<br><h3>3. Reduced Dependency On A Single Configuration</h3>
+<p>When each service uses its own selector, updating one provider’s DKIM configuration doesn’t necessarily affect the others. This separation helps administrators troubleshoot authentication failures without disrupting every email service connected to the domain.</p>
+<br><h2>How Multiple DKIM Selectors Work Together</h2><br>
+<p>Multiple DKIM selectors work through <strong>DNS records and email headers</strong>. Although different services use separate selectors, they can all authenticate messages for the same domain.</p>
+<p>The process generally follows these steps:</p>
+<ul>
+<li><strong>Generate DKIM keys</strong>: Each email service either generates a public-private key pair or provides the DNS configuration you need.</li><br>
+<li><strong>Create DNS records</strong>: The administrator publishes the corresponding public key at the selector-specific _domainkey hostname.</li><br>
+<li><strong>Configure email services</strong>: Each provider <strong>signs outgoing messages</strong> with its assigned selector.</li><br>
+<li><strong>Send authenticated emails</strong>: <em>When an email is sent, the provider adds a DKIM-Signature header with the selector and signing domain.</em><a href="https://dmarcreport.com/blog/how-to-find-a-dkim-selector-for-your-domain/">Explore here</a> for more insights.</li><br>
+</ul>
+<br><br><p><center><img style="displya: block; margin-left: auto;" src="dkim selector-1.jpg" alt=dkim selector-1" /></p></center><br>
+<br><h2>Common DKIM Selector Configurations For Different Email Services</h2><br>
+<p>Different email services can use separate DKIM selectors based on their authentication requirements. Administrators should follow the DNS configuration provided by each platform rather than assuming that all providers use the same selector format.</p>
+<p>Here are some common examples:</p>
+<br><h3>1. Google Workspace</h3>
+<p>Google Workspace lets organizations <strong>configure DKIM authentication</strong> for outgoing business email. An administrator generates a DKIM key in the Google Admin console, then adds the provided <a href="https://en.wikipedia.org/wiki/TXT_record">TXT record</a> to the domain’s DNS settings. For example, the selector “google” creates the hostname google._domainkey.example.com. After the DNS changes are available, the administrator activates DKIM signing in Google Workspace, and outgoing emails include a DKIM signature associated with that selector.</p>
+<br><h3>2. Mailchimp</h3>
+<p><em>Email platforms such as Mailchimp use DKIM to help authenticate messages sent through their systems. To</em> authorize a platform to sign email for an organization’s domain, administrators generally add the provider’s specified DNS records. For example, an illustrative selector named “marketing” could use the record name:</p>
+<p>marketing._domainkey.example.com</p>
+<p>Use the exact selector and record values provided by the email platform, as configurations vary.</p>
+<br><h3>3. Salesforce</h3>
+<p>Salesforce supports DKIM signing for emails sent through its platform. Administrators configure the required DKIM keys and publish the <strong>matching public key record</strong> in DNS. For example, a selector named “salesforce” could create `salesforce._domainkey.example.com`, allowing receiving mail servers to retrieve the public key to validate messages sent through Salesforce.</p>                   
+                    </div>              
+                </section>
+            </div>            
+          </div>
+
+         
+  </body>
+</html>
