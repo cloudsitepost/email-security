@@ -1,0 +1,111 @@
+</<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>How To Create A DMARC Record And Prevent Email Phishing Attacks
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	</title>
+<link rel="stylesheet" href="css/template478.css">	
+
+</head>
+<body>
+<div id="container">
+  <div id="content">
+    <div id="about">
+      <h1>
+<h1>How To Create A DMARC Record       
+
+<br>And Prevent Email Phishing Attacks
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</h1>
+<br>
+
+
+<p>Email phishing attacks often rely on trusted-looking domain names and messages that impersonate legitimate organizations. Attackers may use fraudulent emails to steal sensitive information, distribute malware, or persuade employees to transfer money. <em>DMARC helps organizations protect their domains from unauthorized use and strengthen email security</em>.</p>
+<p>DMARC works with SPF and DKIM to help receiving servers authenticate messages. A correctly configured DMARC record can reduce domain spoofing, support email deliverability, and provide stronger<strong> protection against phishing</strong> that impersonates your domain. Visit <a href="https://dmarcreport.com/blog/how-to-add-a-dmarc-record-to-dns/">this link</a> to learn more.</p>
+<br><h2>What Is a DMARC Record?</h2><br>
+<p>A DMARC record is a DNS TXT record that tells receiving email servers how to handle messages that fail SPF or DKIM authentication and domain-alignment checks. It can also direct aggregate reports to an address you specify.</p>
+<br><h2>How DMARC Helps Protect Against Phishing</h2><br>
+<p>When someone sends a fraudulent email using your organization’s domain, DMARC lets receiving servers evaluate whether the message meets authentication requirements. Your DMARC policy tells those servers whether to monitor the message, quarantine it, or reject it.</p>
+<p>This can reduce the likelihood that messages impersonating your domain reach recipients and help protect your organization’s reputation. <em>DMARC does not address every kind of phishing, such as messages from compromised legitimate accounts or unrelated domains, so it should be part of a broader security program</em>.</p>
+<br><br><p><center><img style="displya: block; margin-left: auto;" src="create dmarc record.jpg" alt=create dmarc record-" /></p></center>
+<br><h2>Understanding SPF, DKIM, and DMARC</h2><br>
+<p>DMARC builds on two email authentication protocols:</p>
+<ul>
+<li>SPF identifies the servers authorized to send email on behalf of your domain.</li><br>
+<li>DKIM uses cryptographic signatures to help verify that a message is associated with an authorized sending domain and has not been improperly modified.</li><br>
+<li>DMARC connects SPF and DKIM results to <strong>domain-alignment requirements </strong>and tells receiving servers how to handle messages that fail DMARC evaluation.</li>
+</ul>
+<br><h2>How to Create a DMARC Record</h2><br>
+<h3>Step 1: Verify Your SPF and DKIM Records</h3>
+<p>Before enabling DMARC, confirm that SPF and DKIM are correctly configured for your domain. Identify every legitimate email source, including Microsoft 365, Google Workspace, marketing platforms, <a href="https://www.zoho.com/crm/what-is-crm.html">CRM systems</a>, and third-party email providers.</p>
+<br><h3>Step 2: Prepare Your DMARC TXT Record</h3>
+<p>A basic DMARC record might look like this:</p>
+<p>`v=DMARC1; p=none; rua=mailto:dmarc@example.com`</p>
+<p>Replace `example.com` with your domain and use a valid address for reports. The tags shown are:</p>
+<ul>
+<li>v=DMARC1 identifies the DMARC protocol version.</li><br>
+<li><em>p=none requests monitoring without asking receiving servers to quarantine or reject failing messages</em>.</li><br>
+<li>rua specifies the destination for aggregate DMARC reports.</li><br>
+</ul>
+<p>A DMARC generator can help you create a record with suitable tags and reduce configuration errors.</p>
+<br><h3>Step 3: Publish the Record in DNS</h3>
+<p>Sign in to your domain registrar or DNS hosting provider and add a TXT record using these settings:</p>
+<p>| DNS field | Value |</p>
+<p>|---|---|</p>
+<p>| Host/Name | `_dmarc` |</p>
+<p>| Type | `TXT` |</p>
+<p>| Value | Your DMARC record |</p>
+<p>| TTL | Default or provider-recommended value |</p>
+<p>Save the record and allow time for <a href="https://www.ibm.com/think/topics/dns-propagation">DNS propagation</a>. Depending on your provider and DNS configuration, the update may take several hours or <strong>longer to appear globally</strong>.</p>
+<br><h2>Strengthen Your DMARC Policy Gradually</h2><br>
+<h3>Start With Monitoring</h3>
+<p>Begin with `p=none` to collect reports and find legitimate email sources that may be failing authentication. DMARC reports can help administrators identify unauthorized senders, diagnose SPF or DKIM configuration issues, and understand how messages are authenticated.</p>
+<p>A DMARC checker or reporting platform can make reports easier to review and help surface potential configuration or security concerns.</p>
+<br><br><p><center><img style="displya: block; margin-left: auto;" src="create dmarc record-3.jpg" alt=create dmarc record-3" /></p></center>
+<h3>Move to Quarantine or Reject</h3>
+<p>After reviewing reports and correcting authentication problems, consider strengthening your policy:</p>
+<ul>
+<li>`p=none` monitors authentication without requesting enforcement.</li><br>
+<li><em>`p=quarantine` asks receiving servers to treat failing messages as suspicious, often by placing them in spam</em>.</li><br>
+<li>`p=reject` asks receiving servers to reject messages that fail DMARC evaluation.</li><br>
+</ul>
+<p>A properly implemented `p=reject` policy can provide strong protection against direct domain spoofing. Before enforcing it, authenticate legitimate email sources to reduce the risk of disrupting business communications.</p>
+<br><h2>Best Practices for Maintaining DMARC</h2><br>
+<h3>Review Authentication Continuously</h3>
+<p>Email infrastructure changes as organizations add SaaS platforms and marketing services. Review DMARC reports regularly and update authentication settings when you introduce new sending sources.</p>
+<p>Tools such as AutoSPF, PowerDMARC, and EasyDMARC can help organizations manage email authentication, monitor records, and identify configuration issues.</p>
+<br><h3>Use DMARC Alongside Other Security Measures</h3>
+<p>DMARC works best as part of a broader cybersecurity approach. Complement it with employee phishing-awareness training, <a href="https://en.wikipedia.org/wiki/Multi-factor_authentication">multi-factor authentication</a>, secure email gateways, and <strong>incident-response procedures</strong>. These measures help address threats DMARC alone cannot prevent, including compromised legitimate accounts and deceptive emails sent from unrelated domains.</p>
